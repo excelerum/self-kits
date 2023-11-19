@@ -8,8 +8,8 @@
       </p>
 
       <div class="ml-5">
-        <v-btn class="py-7">
-          <v-icon color="#EF6C00" icon="apartment"></v-icon>
+        <v-btn class="py-2">
+          <v-icon color="#EF6C00" icon="mdi-office-building-outline"></v-icon>
           <span class="ml-4 custom-transform-class text-none font-weight-light"
             >Designing and mocking APIs</span
           >
@@ -20,7 +20,7 @@
           >
         </v-btn>
         <v-btn class="py-7">
-          <v-icon color="#00E676">pest_control</v-icon>
+          <v-icon color="#00E676" icon="mdi-bug-outline"></v-icon>
           <span class="ml-4 custom-transform-class text-none font-weight-light"
             >Debugging and manual testing</span
           >
@@ -31,7 +31,7 @@
           >
         </v-btn>
         <v-btn class="py-7">
-          <v-icon color="#039BE5">integration_instructions</v-icon>
+          <v-icon color="#039BE5" icon="mdi-ab-testing"></v-icon>
           <span class="ml-4 custom-transform-class text-none font-weight-light"
             >Automated testing</span
           >
@@ -42,7 +42,7 @@
           >
         </v-btn>
         <v-btn class="py-7">
-          <v-icon color="#FFFF00">table_view</v-icon>
+          <v-icon color="#FFFF00" icon="mdi-table-multiple"></v-icon>
           <span class="ml-4 custom-transform-class text-none font-weight-light"
             >API documentation</span
           >
@@ -53,7 +53,7 @@
           >
         </v-btn>
         <v-btn class="py-7">
-          <v-icon color="#D50000">timeline</v-icon>
+          <v-icon color="#D50000" icon="mdi-chart-timeline-variant"></v-icon>
           <span class="ml-4 custom-transform-class text-none font-weight-light"
             >Monotoring</span
           >
@@ -64,7 +64,7 @@
           >
         </v-btn>
         <v-btn class="py-7">
-          <v-icon color="#2E7D32">api</v-icon>
+          <v-icon color="#2E7D32" icon="mdi-api"></v-icon>
           <span class="ml-4 custom-transform-class text-none font-weight-light"
             >Collaboration</span
           >

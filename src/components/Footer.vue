@@ -1,28 +1,28 @@
 <template>
-  <v-footer app padless style="border-top: 1px solid grey" height="44">
+  <v-footer app padless style="border-top: 1px solid grey" height="24">
     <v-btn
-      class="ma-2 footer-menu-icon"
+      class="footer-menu-icon"
       size="x-small"
-      prepend-icon="terminal"
+      prepend-icon="mdi-console"
       variant="text"
     >
-      Console
+      <span style="margin-bottom: 4px;"> Console </span>
     </v-btn>
 
     <v-spacer></v-spacer>
 
     <v-btn
-      class="ma-2 footer-menu-icon"
+      class="footer-menu-icon"
       variant="text"
       size="x-small"
-      icon="keyboard"
+      icon="mdi-keyboard"
     >
     </v-btn>
     <v-btn
-      class="ma-2 footer-menu-icon"
+      class="footer-menu-icon"
       variant="text"
       size="x-small"
-      icon="help"
+      icon="mdi-help"
     >
     </v-btn>
   </v-footer>

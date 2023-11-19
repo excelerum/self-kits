@@ -4,7 +4,7 @@
       density="compact"
       variant="solo"
       label="Search..."
-      prepend-inner-icon="search"
+      prepend-inner-icon="mdi-magnify"
       single-line
       hide-details
     ></v-text-field>
@@ -55,11 +55,15 @@ const items = [
   {
     link: "/unix-time-converter",
     text: "Unix Time Converter",
-    icon: "schedule",
+    icon: "mdi-clock-outline",
   },
-  { text: "JSON Format/Validate", icon: "star", link: "/home" },
-  { text: "Base64 String Encode/Decode", icon: "history" },
-  { text: "Base64 Image Encode/Decode", icon: "upload" },
-  { text: "JWT Debugger", icon: "cloud_upload" },
+  {
+    text: "JSON Format/Validate",
+    icon: "mdi-star",
+    link: "/json-format-validate",
+  },
+  { text: "Base64 String Encode/Decode", icon: "mdi-history", link: "/home" },
+  { text: "Base64 Image Encode/Decode", icon: "mdi-upload" },
+  { text: "JWT Debugger", icon: "mdi-cloud-upload" },
 ];
 </script>

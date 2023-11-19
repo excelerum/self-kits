@@ -4,7 +4,7 @@
       density="compact"
       variant="solo"
       label="Search..."
-      prepend-inner-icon="search"
+      prepend-inner-icon="mdi-magnify"
       single-line
       hide-details
     ></v-text-field>
@@ -19,7 +19,7 @@
         color="grey darken-3"
         class="text-capitalize mt-5 subheading font-weight-bold"
       >
-        <v-icon class="mr-1" color="#EF6C00">north_west</v-icon>
+        <v-icon class="mr-1" color="#EF6C00" icon="mdi-arrow-top-left"></v-icon>
         <span class="mr-1 grey--text">Show me how</span>
       </v-btn>
     </div>

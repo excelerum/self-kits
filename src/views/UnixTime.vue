@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="about" style="padding: 24px;">
+    <v-row> Hello </v-row>
   </div>
 </template>
 

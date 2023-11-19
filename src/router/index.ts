@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/json-format-validate",
         name: "JSON Format/Validate",
-        component: () => import("@/views/Home.vue"),
+        component: () => import("@/views/JsonFormat.vue"),
       },
     ],
   },
@@ -27,6 +27,16 @@ const routes: Array<RouteRecordRaw> = [
     path: "/signup",
     name: "SignUp",
     component: () => import("@/views/SignUp.vue"),
+  },
+  {
+    // the 404 route, when none of the above matches
+    path: "/404",
+    name: "404",
+    component: () => import("@/views/Error404.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/404",
   },
 ];
 

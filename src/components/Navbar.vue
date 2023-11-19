@@ -6,7 +6,7 @@
       color="orange darken-3"
       class="text-capitalize mr-3 subheading font-weight-bold"
     >
-      <v-icon class="mr-2 ml-n2">add_box</v-icon>
+      <v-icon class="mr-2 ml-n2" icon="mdi-plus-circle-outline"></v-icon>
       <span class="mr-n2">New</span>
     </v-btn>
     <v-btn
@@ -31,8 +31,12 @@
           class="grey--text text-capitalize mr-3 subheading font-weight-bold"
           v-bind="props"
         >
-          <v-icon class="mr-1 ml-n2" color="grey">post_add</v-icon>
-          <v-icon class="mr-n2" color="grey">arrow_drop_down</v-icon>
+          <v-icon
+            class="mr-1 ml-n2"
+            color="grey"
+            icon="mdi-note-plus-outline"
+          ></v-icon>
+          <v-icon class="mr-n2" color="grey" icon="mdi-menu-down"></v-icon>
         </v-btn>
       </template>
       <v-list height="160">
@@ -61,16 +65,16 @@
     <v-spacer></v-spacer>
 
     <v-btn class="text-capitalize mr-5 subheading font-weight-bold">
-      <v-icon class="mr-2" icon="dashboard" />
+      <v-icon class="mr-2" icon="mdi-view-dashboard-outline" />
       <span class="mr-2">My Workspace</span>
-      <v-icon>arrow_drop_down</v-icon>
+      <v-icon icon="mdi-menu-down"></v-icon>
     </v-btn>
     <v-btn
       elevation="1"
       color="grey darken-3"
       class="text-capitalize subheading font-weight-bold"
     >
-      <v-icon class="mr-2 ml-n2" icon="person_add_alt_1" />
+      <v-icon class="mr-2 ml-n2" icon="mdi-account-multiple-plus-outline" />
       <span class="mr-n2">Invite</span>
     </v-btn>
 
@@ -78,7 +82,7 @@
     <v-tooltip bottom>
       <template v-slot:activator="{ props }">
         <v-btn fab small v-bind="props" class="mr-2 orange darken-3">
-          <v-icon>autorenew</v-icon>
+          <v-icon icon="mdi-autorenew"></v-icon>
         </v-btn>
       </template>
       <span>Sync your API requests across devices</span>
@@ -86,7 +90,7 @@
     <v-tooltip bottom>
       <template v-slot:activator="{ props }">
         <v-btn fab small v-bind="props" class="mr-2">
-          <v-icon>wifi_tethering</v-icon>
+          <v-icon icon="mdi-access-point"></v-icon>
         </v-btn>
       </template>
       <span>Capture requests ans cookies with Postman</span>
@@ -94,7 +98,7 @@
     <v-tooltip bottom>
       <template v-slot:activator="{ props }">
         <v-btn fab small v-bind="props" class="mr-2">
-          <v-icon>settings</v-icon>
+          <v-icon icon="mdi-cog"></v-icon>
         </v-btn>
       </template>
       <span>Settings</span>
@@ -102,7 +106,7 @@
     <v-tooltip bottom>
       <template v-slot:activator="{ props }">
         <v-btn fab small class="mr-2" v-bind="props">
-          <v-icon>notifications</v-icon>
+          <v-icon icon="mdi-bell-outline"></v-icon>
         </v-btn>
       </template>
       <span>Notifications</span>
@@ -110,7 +114,7 @@
     <v-tooltip bottom>
       <template v-slot:activator="{ props }">
         <v-btn fab small v-bind="props" class="mr-2 teal lighten-2">
-          <v-icon>account_tree</v-icon>
+          <v-icon icon="mdi-account-edit-outline"></v-icon>
         </v-btn>
       </template>
       <span>Manage accounts</span>
@@ -122,7 +126,7 @@
     >
       <router-link to="/signup"></router-link>
       <span class="mr-1 grey--text">Upgrade</span>
-      <v-icon class="mr-n2" color="grey">arrow_drop_down</v-icon>
+      <v-icon class="mr-n2" color="grey" icon="mdi-menu-down"></v-icon>
     </v-btn>
   </v-app-bar>
 </template>

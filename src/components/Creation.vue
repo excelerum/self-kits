@@ -6,7 +6,7 @@
         <v-btn
           class="custom-transform-class text-none mr-5 subheading font-weight-bold"
         >
-          <v-icon class="mr-2">subtitles</v-icon>
+          <v-icon class="mr-2" icon="mdi-subtitles-outline"></v-icon>
           <span class="ml-2 font-weight-light">Create a request</span>
         </v-btn>
       </v-list-item>
@@ -15,9 +15,9 @@
         <v-btn
           class="custom-transform-class text-none mr-5 subheading font-weight-bold"
         >
-          <v-icon class="mr-2">text_snippet</v-icon>
+          <v-icon class="mr-2" icon="mdi-note-text-outline"></v-icon>
           <span class="ml-2 font-weight-light">Create a collection</span>
-          <v-icon>arrow_drop_down</v-icon>
+          <v-icon icon="mdi-menu-down"></v-icon>
         </v-btn>
       </v-list-item>
 
@@ -25,7 +25,7 @@
         <v-btn
           class="custom-transform-class text-none mr-5 subheading font-weight-bold"
         >
-          <v-icon class="mr-2">snippet_folder</v-icon>
+          <v-icon class="mr-2" icon="mdi-folder-open-outline"></v-icon>
           <span class="ml-2 font-weight-light">Create an environment</span>
         </v-btn>
       </v-list-item>
@@ -35,7 +35,7 @@
           disabled
           class="custom-transform-class text-none mr-5 subheading font-weight-bold"
         >
-          <v-icon class="mr-2">scatter_plot</v-icon>
+          <v-icon class="mr-2" icon="mdi-scatter-plot-outline"></v-icon>
           <span class="ml-2 font-weight-light">Create an API</span>
         </v-btn>
       </v-list-item>
@@ -44,7 +44,7 @@
         <v-btn
           class="custom-transform-class text-none mr-5 subheading font-weight-bold"
         >
-          <v-icon class="mr-2">more_horiz</v-icon>
+          <v-icon class="mr-2" icon="mdi-dots-horizontal"></v-icon>
           <span class="ml-2 font-weight-light">View More</span>
         </v-btn>
       </v-list-item>
@@ -75,7 +75,7 @@
     <v-btn
       class="custom-transform-class text-none mr-5 subheading font-weight-bold"
     >
-      <v-icon class="mx-2">more_horiz</v-icon>
+      <v-icon class="mx-2" icon="mdi-dots-horizontal"></v-icon>
       <span class="ml-3 font-weight-light">More settings</span>
     </v-btn>
   </div>
