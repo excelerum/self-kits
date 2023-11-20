@@ -1,7 +1,9 @@
 <template>
-  <div class="about" style="padding: 24px;">
-    <v-row> Hello </v-row>
-  </div>
+  <v-container class="unix-time">
+    <v-row>
+      <v-col>Hello</v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">

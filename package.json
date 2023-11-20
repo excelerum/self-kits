@@ -22,6 +22,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lezer/common": "^1.1.0",
+    "codemirror": "^6.0.1",
+    "vue-codemirror": "^6.1.1",
     "vuetify": "^3.4.2"
   },
   "devDependencies": {
