@@ -1,23 +1,11 @@
 <template>
   <v-navigation-drawer class="aside-menu" floating>
-    <v-text-field
-      density="compact"
-      variant="solo"
-      label="Search..."
-      prepend-inner-icon="mdi-magnify"
-      single-line
-      hide-details
-    ></v-text-field>
+    <v-text-field density="compact" variant="solo" label="Search..." prepend-inner-icon="mdi-magnify" single-line
+      hide-details></v-text-field>
     <v-divider></v-divider>
 
     <v-list :lines="false" density="comfortable" nav>
-      <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :value="item"
-        color="primary"
-        :to="item.link"
-      >
+      <v-list-item v-for="(item, i) in items" :key="i" :value="item" color="primary" :to="item.link">
         <template v-slot:prepend>
           <v-icon :icon="item.icon"></v-icon>
         </template>

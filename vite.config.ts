@@ -6,17 +6,6 @@ import electron from "vite-plugin-electron";
 import renderer from "vite-plugin-electron-renderer";
 import { notBundle } from "vite-plugin-electron/plugin";
 import pkg from "./package.json";
-import { Plugin } from "vite";
-
-const resolveMetaUrl = (): Plugin => ({
-  name: "resolveMetaUrl",
-  resolveImportMeta(property, chunk) {
-    if (property === "url") {
-      // MARK: keep 'file://' + '/XXX'
-      return `'file:///${path.relative(process.cwd(), chunk.moduleId)}'`;
-    }
-  },
-});
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -91,7 +80,6 @@ export default defineConfig(({ command }) => {
       ]),
       // Use Node.js API in the Renderer process
       renderer(),
-      resolveMetaUrl(),
     ],
     server:
       process.env.VSCODE_DEBUG &&

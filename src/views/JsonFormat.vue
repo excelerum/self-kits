@@ -1,24 +1,66 @@
 <template>
   <v-container class="">
-    <v-row class="mb-6" no-gutters>
-      <v-col :cols="cols[0]">
-        <v-sheet class="pa-2 ma-2"> .v-col-{{ cols[0] }} </v-sheet>
+    <v-row class="">
+      <v-col :cols="6">
+        <MonacoEditor id="input" theme="vs-dark" :options="options" language="plaintext" width="100%" :height="600"
+          v-model:value="input">
+        </MonacoEditor>
       </v-col>
 
-      <v-col :cols="cols[1]">
-        <v-sheet class="pa-2 ma-2"> .v-col-{{ cols[1] }} </v-sheet>
+      <v-col :cols="6">
+        <div>
+          <MonacoEditor id="output" theme="vs-dark" :options="options" language="json" width="100%" :height="600"
+            v-model:value="output">
+          </MonacoEditor>
+        </div>
+        <div class="mt-2">
+          <v-text-field label="Query" variant="solo-filled"></v-text-field>
+        </div>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script setup lang="ts">
-import { computed } from "vue";
-import { useDisplay } from "vuetify";
+<script lang="ts">
+import MonacoEditor from '@/components/code-editor/MonacoEditor.vue';
+import debounce from 'debounce';
 
-const { lg, sm } = useDisplay();
-
-const cols = computed(() => {
-  return lg.value ? [3, 9] : sm.value ? [9, 3] : [6, 6];
-});
+export default {
+  name: "JsonFormat",
+  components: {
+    MonacoEditor,
+  },
+  data() {
+    return {
+      options: {
+        colorDecorators: true,
+        lineHeight: 24,
+        tabSize: 2,
+        minimap: { enabled: false },
+      },
+      input: 'This is example',
+      output: ''
+    };
+  },
+  watch: {
+    input: {
+      handler: function (val, oldVal) {
+        console.log(val);
+        console.log(oldVal);
+        this.output = JSON.parse(val);
+        this.formatJSON(val);
+      },
+      deep: true
+    }
+  },
+  methods: {
+    formatJSON: debounce(function (value) {
+      try {
+        console.log(value);
+      } catch (error) {
+        console.error(error);
+      }
+    }, 500)
+  }
+}
 </script>
