@@ -1,5 +1,5 @@
 <template>
-  <v-footer app border class="app-footer pa-2 text-medium-emphasis" height="24">
+  <v-footer app inset border class="app-footer pa-2 text-medium-emphasis" height="24">
     <v-btn class="footer-menu-icon" size="x-small" prepend-icon="mdi-console" variant="text" rounded="0" text="Console" />
 
     <v-spacer></v-spacer>

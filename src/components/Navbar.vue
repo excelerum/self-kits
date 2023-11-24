@@ -18,21 +18,21 @@
           <v-icon class="mr-n2" color="grey" icon="mdi-menu-down"></v-icon>
         </v-btn>
       </template>
-      <v-list height="160">
+      <v-list height="200">
         <v-list-item-title class="ml-4 body-2 grey--text">
           OPEN NEW
         </v-list-item-title>
         <v-row>
           <v-col>
             <v-list-item dense v-for="(item, index) in items" :key="index">
-              <v-list-item-title class="body-2 mt-n2">
+              <v-list-item-title class="body-2">
                 {{ item.title }}
               </v-list-item-title>
             </v-list-item>
           </v-col>
           <v-col>
             <v-list-item dense v-for="(link, i) in links" :key="i">
-              <v-list-item-title class="body-2 mt-n2 grey--text">
+              <v-list-item-title class="body-2 grey--text">
                 {{ link.title }}
               </v-list-item-title>
             </v-list-item>
