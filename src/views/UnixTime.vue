@@ -3,101 +3,213 @@
     <v-row class="ma-2">
       <v-col>
         <div class="d-flex flex-wrap ga-3">
-          <div>Shortcut:</div>
-          <v-btn size="x-small" rounded="sm"> Now </v-btn>
-          <v-btn size="x-small" rounded="sm"> Clipboard </v-btn>
-          <v-btn size="x-small" rounded="sm"> Clear </v-btn>
+          <div class="text-medium-emphasis">Shortcut:</div>
+          <v-btn size="x-small" rounded="sm" @click="(_$event: any) => setInput('now')"> Now </v-btn>
+          <v-btn size="x-small" rounded="sm" @click="pasteClipboard"> Clipboard </v-btn>
+          <v-btn size="x-small" rounded="sm" @click="clearInput"> Clear </v-btn>
           <v-btn icon="mdi-cog" size="x-small" rounded="sm" density="comfortable" />
         </div>
       </v-col>
     </v-row>
     <v-row class="ma-2">
       <v-col :cols="6">
-        <v-text-field
-          label="Input"
-          variant="outlined"
-          density="compact"
-          hint="Tips: Mathematical operators + - * / are supported"
-          persistent-hint
-        ></v-text-field>
+        <v-text-field label="Input" variant="outlined" density="compact"
+          hint="Tips: Mathematical operators + - * / are supported" persistent-hint v-model.trim="input"></v-text-field>
       </v-col>
       <v-col :cols="6">
-        <v-select
-          label="Type"
-          :items="['Unix time (seconds since epoch)', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-          variant="outlined"
-          density="compact"
-        ></v-select>
+        <v-select label="Type" :model-value="inputType" :items="inputTypeOp" variant="outlined"
+          density="compact"></v-select>
       </v-col>
     </v-row>
     <v-divider></v-divider>
     <v-row class="ma-2">
       <v-col :cols="5">
         <div class="">
-          <v-text-field label="Local" variant="outlined" density="compact">
+          <v-text-field label="Local" variant="outlined" density="compact" v-model.lazy="localDate">
             <template v-slot:append>
               <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
             </template>
           </v-text-field>
-          <v-text-field label="UTC (ISO 8601)" variant="outlined" density="compact">
+          <v-text-field label="UTC (ISO 8601)" variant="outlined" density="compact" v-model.lazy="utcDate">
             <template v-slot:append>
               <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
             </template>
           </v-text-field>
-          <v-text-field label="Relative" variant="outlined" density="compact">
+          <v-text-field label="Relative" variant="outlined" density="compact" v-model.lazy="relativeDate">
             <template v-slot:append>
               <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
             </template>
           </v-text-field>
-          <v-text-field label="Unix time" variant="outlined" density="compact">
+          <v-text-field label="Unix time" variant="outlined" density="compact" v-model.lazy="unixTime">
             <template v-slot:append>
               <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
             </template>
           </v-text-field>
         </div>
       </v-col>
-      <v-col :cols="2"
-        ><div>
-          <v-text-field label="Day of year" variant="outlined" density="compact">
-            <template v-slot:append> <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template
-          ></v-text-field>
-          <v-text-field label="Week of year" variant="outlined" density="compact">
-            <template v-slot:append> <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template
-          ></v-text-field>
-          <v-text-field label="Is leaf year?" variant="outlined" density="compact">
-            <template v-slot:append> <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template
-          ></v-text-field></div
-      ></v-col>
+      <v-col :cols="2">
+        <div>
+          <v-text-field label="Day of year" variant="outlined" density="compact" v-model.lazy="dayOfYear">
+            <template v-slot:append> <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
+            </template></v-text-field>
+          <v-text-field label="Week of year" variant="outlined" density="compact" v-model.lazy="weekOfYear">
+            <template v-slot:append> <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
+            </template></v-text-field>
+          <v-text-field label="Is leaf year?" variant="outlined" density="compact" v-model.lazy="isLeafYear">
+            <template v-slot:append> <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
+            </template></v-text-field>
+        </div>
+      </v-col>
       <v-col :cols="5">
-        <div class="text-subtitle-1 text-medium-emphasis mb-4">Other formats (local)</div>
-        <v-text-field variant="outlined" density="compact">
+        <v-select label="Format by Country" :items="formatByCountryOp" variant="outlined" density="compact"
+          v-model="formatByCountry" clearable></v-select>
+        <v-text-field variant="outlined" density="compact" v-model.lazy="dateByFormat">
           <template v-slot:append>
-            <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template></v-text-field
-        ><v-text-field variant="outlined" density="compact">
-          <template v-slot:append>
-            <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template></v-text-field
-        ><v-text-field variant="outlined" density="compact">
-          <template v-slot:append>
-            <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template></v-text-field
-        ><v-text-field variant="outlined" density="compact">
-          <template v-slot:append>
-            <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template></v-text-field
-        ><v-text-field variant="outlined" density="compact">
-          <template v-slot:append>
-            <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template></v-text-field
-        ><v-text-field variant="outlined" density="compact">
-          <template v-slot:append>
-            <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template></v-text-field
-        ><v-text-field variant="outlined" density="compact">
-          <template v-slot:append>
-            <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template></v-text-field
-      ></v-col>
+            <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template></v-text-field>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script lang="ts">
-  export default {
-    name: 'UnixTime'
+<script lang="ts" >
+import debounce from 'debounce';
+import { ref } from 'vue'
+import moment from 'moment';
+import { clipboard } from 'electron';
+
+export default {
+  name: 'UnixTime',
+  setup() {
+    const input = ref<string | number | null>(null);
+    const inputType = ref<string>("unix");
+    const localDate = ref<string | null>(null);
+    const utcDate = ref<string | null>(null);
+    const relativeDate = ref<string | null>(null);
+    const unixTime = ref<string | null>(null);
+    const dayOfYear = ref<number | null>(null);
+    const weekOfYear = ref<number | null>(null);
+    const isLeafYear = ref<boolean | null>(null);
+    const formatByCountry = ref<string | null>(null);
+    const dateByFormat = ref<string | null>(null);
+
+    const inputTypeOp = [{
+      value: 'unix',
+      title: 'Unix time (seconds since epoch)'
+    }]
+
+    const formatByCountryOp = [{
+      value: 'en-GB',
+      title: 'en-GB'
+    },
+    {
+      value: 'en-US',
+      title: 'en-US'
+    },
+    {
+      value: 'ko-KR',
+      title: 'ko-KR'
+    }]
+
+    return {
+      input,
+      inputType,
+      localDate,
+      utcDate,
+      relativeDate,
+      unixTime,
+      dayOfYear,
+      weekOfYear,
+      isLeafYear,
+      errorMessage: '',
+      inputTypeOp,
+      formatByCountryOp,
+      formatByCountry,
+      dateByFormat
+    }
+  },
+  methods: {
+    delay: debounce(function (value: string, callback: Function) {
+      callback(value)
+    }, 500),
+    setInput: function (type: string) {
+      if (type === "now") {
+        this.input = Date.now();
+      }
+    },
+    executeMath: function parse(str: string) {
+      const escapeRegex = str.replace(/[+\-*\/\s]+/gm, "");
+      if (escapeRegex.match(/\D/)) {
+        // If includes character not a number
+        return "";
+      }
+      return Function(`return (${str})`)()
+    },
+    pasteClipboard: async function () {
+      const clipboardValue = clipboard.readText();
+      if (clipboardValue) {
+        this.input = clipboardValue;
+      }
+    },
+    clearInput: function () {
+      this.input = null;
+    },
+    clearOutput: function () {
+      this.localDate = null;
+      this.utcDate = null;
+      this.relativeDate = null;
+      this.unixTime = null;
+      this.dayOfYear = null;
+      this.weekOfYear = null;
+      this.isLeafYear = null;
+      this.dateByFormat = null;
+    },
+    formatDateByCountry: function (format: string) {
+      if (format && this.input) {
+        this.dateByFormat = new Date(this.input).toLocaleString(format);
+      } else {
+        this.dateByFormat = null;
+      }
+    }
+  },
+  watch: {
+    input: {
+      handler: function (val) {
+        console.log(val)
+        this.delay(val, (input: number | string | null) => {
+          const strVal = input ? String(input).trim() : null;
+          if (strVal) {
+            try {
+              const rsDate = strVal.match(/[+\-*\/]+/gm) ? this.executeMath(strVal) : strVal;
+              const inputDate = new Date(+rsDate);
+              this.localDate = inputDate.toLocaleString();
+              this.utcDate = inputDate.toUTCString();
+              this.relativeDate = moment(inputDate).fromNow();
+              this.unixTime = String(inputDate.getTime());
+              this.dayOfYear = moment(inputDate).dayOfYear();
+              this.weekOfYear = moment(inputDate).weeksInYear();
+              this.isLeafYear = moment(inputDate).isLeapYear();
+              if (this.formatByCountry) {
+                this.formatDateByCountry(this.formatByCountry);
+              }
+            } catch (error: any) {
+              this.errorMessage = error.message;
+              console.error(error)
+            }
+          } else {
+            this.clearOutput();
+          }
+        })
+      },
+      deep: true
+    },
+    formatByCountry: {
+      handler: function (val) {
+        if (val) {
+          this.formatDateByCountry(val);
+        }
+      },
+      deep: true
+    }
   }
+}
 </script>
