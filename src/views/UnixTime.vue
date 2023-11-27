@@ -25,47 +25,39 @@
     <v-row class="ma-2">
       <v-col :cols="5">
         <div class="">
-          <v-text-field label="Local" variant="outlined" density="compact" v-model.lazy="localDate">
-            <template v-slot:append>
-              <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
-            </template>
+          <v-text-field label="Local" variant="outlined" density="compact" v-model.lazy="localDate"
+            append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(localDate)">
           </v-text-field>
-          <v-text-field label="UTC (ISO 8601)" variant="outlined" density="compact" v-model.lazy="utcDate">
-            <template v-slot:append>
-              <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
-            </template>
+          <v-text-field label="UTC (ISO 8601)" variant="outlined" density="compact" v-model.lazy="utcDate"
+            append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(utcDate)">
           </v-text-field>
-          <v-text-field label="Relative" variant="outlined" density="compact" v-model.lazy="relativeDate">
-            <template v-slot:append>
-              <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
-            </template>
+          <v-text-field label="Relative" variant="outlined" density="compact" v-model.lazy="relativeDate"
+            append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(relativeDate)">
           </v-text-field>
-          <v-text-field label="Unix time" variant="outlined" density="compact" v-model.lazy="unixTime">
-            <template v-slot:append>
-              <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
-            </template>
+          <v-text-field label="Unix time" variant="outlined" density="compact" v-model.lazy="unixTime"
+            append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(unixTime)">
           </v-text-field>
         </div>
       </v-col>
       <v-col :cols="2">
         <div>
-          <v-text-field label="Day of year" variant="outlined" density="compact" v-model.lazy="dayOfYear">
-            <template v-slot:append> <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
-            </template></v-text-field>
-          <v-text-field label="Week of year" variant="outlined" density="compact" v-model.lazy="weekOfYear">
-            <template v-slot:append> <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
-            </template></v-text-field>
-          <v-text-field label="Is leaf year?" variant="outlined" density="compact" v-model.lazy="isLeafYear">
-            <template v-slot:append> <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" />
-            </template></v-text-field>
+          <v-text-field label="Day of year" variant="outlined" density="compact" v-model.lazy="dayOfYear"
+            append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(dayOfYear)">
+          </v-text-field>
+          <v-text-field label="Week of year" variant="outlined" density="compact" v-model.lazy="weekOfYear"
+            append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(weekOfYear)">
+          </v-text-field>
+          <v-text-field label="Is leaf year?" variant="outlined" density="compact" v-model.lazy="isLeafYear"
+            append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(isLeafYear)">
+          </v-text-field>
         </div>
       </v-col>
       <v-col :cols="5">
         <v-select label="Format by Country" :items="formatByCountryOp" variant="outlined" density="compact"
           v-model="formatByCountry" clearable></v-select>
-        <v-text-field variant="outlined" density="compact" v-model.lazy="dateByFormat">
-          <template v-slot:append>
-            <v-btn icon="mdi-content-copy" rounded="sm" density="comfortable" /> </template></v-text-field>
+        <v-text-field variant="outlined" density="compact" v-model.lazy="dateByFormat"
+          append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(dateByFormat)">
+        </v-text-field>
       </v-col>
     </v-row>
   </v-container>
@@ -144,7 +136,7 @@ export default {
       }
       return Function(`return (${str})`)()
     },
-    pasteClipboard: async function () {
+    pasteClipboard: function () {
       const clipboardValue = clipboard.readText();
       if (clipboardValue) {
         this.input = clipboardValue;
@@ -169,7 +161,12 @@ export default {
       } else {
         this.dateByFormat = null;
       }
-    }
+    },
+    copyToClipboard: function (value: any) {
+      if (value) {
+        clipboard.writeText(String(value));
+      }
+    },
   },
   watch: {
     input: {

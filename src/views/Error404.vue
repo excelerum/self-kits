@@ -3,12 +3,7 @@
     <v-row justify="center" align="center" style="height: 99vh">
       <div>
         <!--begin::Illustration-->
-        <img
-          src="media/illustrations/sketchy-1/18.png"
-          alt=""
-          class="mw-100 mb-10 h-lg-450px"
-          style="width: 450px"
-        />
+        <img src="media/illustrations/sketchy-1/18.png" alt="" class="mw-100 mb-10 h-lg-450px" style="width: 450px" />
         <!--end::Illustration-->
 
         <!--begin::Message-->
@@ -18,7 +13,13 @@
         <!--end::Message-->
 
         <!--begin::Link-->
-        <router-link to="/" class="btn btn-primary">Return Home</router-link>
+        <div class="d-flex justify-center">
+          <router-link to="/" class="btn btn-primary">
+            <v-btn prepend-icon="mdi-home" variant="tonal">
+              Back to Home
+            </v-btn>
+          </router-link>
+        </div>
         <!--end::Link-->
       </div>
     </v-row>
@@ -31,6 +32,6 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "error-404",
   components: {},
-  setup() {},
+  setup() { },
 });
 </script>
