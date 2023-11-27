@@ -40,6 +40,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/base64-image',
         name: 'Base64 Image Encode/Decode',
         component: () => import('@/views/Base64Image.vue')
+      },
+      {
+        path: '/jwt-debugger',
+        name: 'JWT Debugger',
+        component: () => import('@/views/JwtDebugger.vue')
       }
     ]
   },

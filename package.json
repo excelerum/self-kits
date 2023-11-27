@@ -22,11 +22,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
     "debounce": "^2.0.0",
     "fastify": "^4.24.3",
     "jsonpath-plus": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
     "lokijs": "^1.5.12",
     "moment": "^2.29.4",
     "monaco-editor": "^0.44.0",
@@ -35,6 +35,8 @@
   },
   "devDependencies": {
     "@mdi/font": "^7.3.67",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/lokijs": "^1.5.14",
     "@vitejs/plugin-vue": "^4.3.3",
     "electron": "^26.0.0",

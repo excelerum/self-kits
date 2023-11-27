@@ -118,5 +118,5 @@ ipcMain.handle('open-win', (_, arg) => {
   }
 })
 
-const server = new FastifyServer(6969)
-server.init()
+// const server = new FastifyServer(6969)
+// server.init()
