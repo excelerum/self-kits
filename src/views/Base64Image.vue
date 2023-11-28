@@ -5,12 +5,12 @@
                 <div class="d-flex justify-space-between">
                     <div class="d-flex flex-wrap ga-3">
                         <span class="text-medium-emphasis">Shortcut</span>
-                        <v-btn size="x-small" rounded="sm" @click="clearData"> Clear </v-btn>
-                        <v-btn size="x-small" rounded="sm" @click="exampleData"> Example </v-btn>
-                        <v-btn icon="mdi-cog" size="x-small" rounded="sm" density="comfortable" />
+                        <v-btn size="small" rounded="sm" @click="clearData"> Clear </v-btn>
+                        <v-btn size="small" rounded="sm" @click="exampleData"> Example </v-btn>
+                        <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
                     </div>
                     <div>
-                        <v-btn prepend-icon="mdi-content-copy" size="small" rounded="sm" density="comfortable">Copy</v-btn>
+                        <v-btn prepend-icon="mdi-content-copy" size="small" rounded="sm">Copy</v-btn>
                     </div>
                 </div>
                 <div class="mt-3">
@@ -22,9 +22,9 @@
                 <div class="d-flex justify-space-between">
                     <span class="text-medium-emphasis">Image</span>
                     <div class="d-flex flex-wrap ga-3 ">
-                        <v-btn size="x-small" rounded="sm"> Clear </v-btn>
-                        <v-btn size="x-small" rounded="sm" @click="downloadImage"> Dowwnload </v-btn>
-                        <v-btn size="x-small" rounded="sm" @click="copyToClipboard"> Copy </v-btn>
+                        <v-btn size="small" rounded="sm"> Clear </v-btn>
+                        <v-btn size="small" rounded="sm" @click="downloadImage"> Dowwnload </v-btn>
+                        <v-btn size="small" rounded="sm" @click="copyToClipboard"> Copy </v-btn>
                     </div>
                 </div>
                 <div class="pa-4 d-flex" style="height: 83vh;">

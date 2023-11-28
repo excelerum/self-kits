@@ -4,9 +4,9 @@
       <v-col>
         <div class="d-flex flex-wrap ga-3">
           <div class="text-medium-emphasis">Shortcut:</div>
-          <v-btn size="x-small" rounded="sm" @click="onLoadClipboardInput"> Clipboard </v-btn>
-          <v-btn size="x-small" rounded="sm" @click="onClearInput"> Clear </v-btn>
-          <v-btn icon="mdi-cog" size="x-small" rounded="sm" density="comfortable" />
+          <v-btn size="small" rounded="sm" @click="onLoadClipboardInput"> Clipboard </v-btn>
+          <v-btn size="small" rounded="sm" @click="onClearInput"> Clear </v-btn>
+          <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
         </div>
       </v-col>
     </v-row>

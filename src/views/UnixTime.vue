@@ -3,11 +3,11 @@
     <v-row class="ma-2">
       <v-col>
         <div class="d-flex flex-wrap ga-3">
-          <div class="text-medium-emphasis">Shortcut:</div>
-          <v-btn size="x-small" rounded="sm" @click="(_$event: any) => setInput('now')"> Now </v-btn>
-          <v-btn size="x-small" rounded="sm" @click="pasteClipboard"> Clipboard </v-btn>
-          <v-btn size="x-small" rounded="sm" @click="clearInput"> Clear </v-btn>
-          <v-btn icon="mdi-cog" size="x-small" rounded="sm" density="comfortable" />
+          <div class="text-overline text-medium-emphasis">Shortcut:</div>
+          <v-btn size="small" rounded="sm" @click="(_$event: any) => setInput('now')"> Now </v-btn>
+          <v-btn size="small" rounded="sm" @click="pasteClipboard"> Clipboard </v-btn>
+          <v-btn size="small" rounded="sm" @click="clearInput"> Clear </v-btn>
+          <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
         </div>
       </v-col>
     </v-row>
@@ -83,6 +83,7 @@ export default {
     const isLeafYear = ref<boolean | null>(null);
     const formatByCountry = ref<string | null>(null);
     const dateByFormat = ref<string | null>(null);
+    const relativeDateTimer = ref<any>(null);
 
     const inputTypeOp = [{
       value: 'unix',
@@ -108,6 +109,7 @@ export default {
       localDate,
       utcDate,
       relativeDate,
+      relativeDateTimer,
       unixTime,
       dayOfYear,
       weekOfYear,
@@ -116,7 +118,7 @@ export default {
       inputTypeOp,
       formatByCountryOp,
       formatByCountry,
-      dateByFormat
+      dateByFormat,
     }
   },
   methods: {
@@ -148,12 +150,17 @@ export default {
     clearOutput: function () {
       this.localDate = null;
       this.utcDate = null;
-      this.relativeDate = null;
       this.unixTime = null;
       this.dayOfYear = null;
       this.weekOfYear = null;
       this.isLeafYear = null;
       this.dateByFormat = null;
+
+      this.relativeDate = null;
+      // Clear interval
+      if (this.relativeDateTimer) {
+        clearInterval(this.relativeDateTimer);
+      }
     },
     formatDateByCountry: function (format: string) {
       if (format && this.input) {
@@ -180,7 +187,6 @@ export default {
               const inputDate = new Date(+rsDate);
               this.localDate = inputDate.toLocaleString();
               this.utcDate = inputDate.toUTCString();
-              this.relativeDate = moment(inputDate).fromNow();
               this.unixTime = String(inputDate.getTime());
               this.dayOfYear = moment(inputDate).dayOfYear();
               this.weekOfYear = moment(inputDate).weeksInYear();
@@ -188,6 +194,26 @@ export default {
               if (this.formatByCountry) {
                 this.formatDateByCountry(this.formatByCountry);
               }
+
+              const isLate = moment().isAfter(inputDate);
+
+              const seconds = moment().diff(moment(inputDate), 'seconds')
+              const formatted = moment.utc(seconds * 1000).format('HH:mm:ss');
+              this.relativeDate = `${formatted} ${isLate ? 'before' : 'ago'}`;
+              // Handle for this case
+              if (this.relativeDateTimer) {
+                clearInterval(this.relativeDateTimer);
+              }
+              this.relativeDateTimer = setInterval(() => {
+                // Auto decrease every seconds.
+                // this.relativeDate = moment(inputDate).fromNow();
+                const isLate = moment().isAfter(inputDate);
+
+                const seconds = moment().diff(moment(inputDate), 'seconds')
+                const formatted = moment.utc(seconds * 1000).format('HH:mm:ss');
+                this.relativeDate = `${formatted} ${isLate ? 'before' : 'ago'}`;
+                console.log(this.relativeDate)
+              }, 500);
             } catch (error: any) {
               this.errorMessage = error.message;
               console.error(error)
@@ -206,6 +232,11 @@ export default {
         }
       },
       deep: true
+    }
+  },
+  beforeUnmount() {
+    if (this.relativeDateTimer) {
+      clearInterval(this.relativeDateTimer)
     }
   }
 }

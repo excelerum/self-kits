@@ -45,6 +45,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/jwt-debugger',
         name: 'JWT Debugger',
         component: () => import('@/views/JwtDebugger.vue')
+      },
+      {
+        path: '/excel-to-json',
+        name: 'Excel To Json',
+        component: () => import('@/views/ExcelToJson.vue')
       }
     ]
   },

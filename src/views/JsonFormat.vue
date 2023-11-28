@@ -7,8 +7,8 @@
             <span class="text-medium-emphasis">Shortcut: </span>
           </div>
           <div class="d-flex flex-wrap ga-3">
-            <v-btn size="x-small" rounded="sm" @click="generateExample"> Example </v-btn>
-            <v-btn icon="mdi-cog" size="x-small" rounded="sm" density="comfortable" />
+            <v-btn size="small" rounded="sm" @click="generateExample"> Example </v-btn>
+            <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
           </div>
         </div>
         <div class="my-3">
@@ -24,10 +24,10 @@
 
       <v-col :cols="6">
         <div class="d-flex flex-wrap ga-3 justify-end">
-          <v-btn size="x-small" rounded="sm"> Copy </v-btn>
+          <v-btn size="small" rounded="sm"> Copy </v-btn>
           <!-- <v-select class="output-space" label="Space" :items="[1, 2, 3, 4]" variant="outlined" :model-value="space"
             density="compact" style="width: 20px"></v-select> -->
-          <v-btn icon="mdi-cog" size="x-small" rounded="sm" density="comfortable" />
+          <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
         </div>
         <div class="my-3">
           <MonacoEditor id="output" theme="vs-dark" :options="options" language="json" width="100%" :height="600"

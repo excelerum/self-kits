@@ -60,7 +60,8 @@
     },
     { text: 'Base64 String Encode/Decode', icon: 'mdi-history', link: '/base64-string' },
     { text: 'Base64 Image Encode/Decode', icon: 'mdi-upload', link: '/base64-image' },
-    { text: 'JWT Debugger', icon: 'mdi-cloud-upload', link: '/jwt-debugger' }
+    { text: 'JWT Debugger', icon: 'mdi-cloud-upload', link: '/jwt-debugger' },
+    { text: 'Excel To Json', icon: 'mdi-file-excel-outline', link: '/excel-to-json' },
   ]
 
   const searchValue = ref<string | null>(null)

@@ -5,9 +5,9 @@
         <div class="d-flex justify-space-between">
           <div class="d-flex flex-wrap ga-3">
             <span class="text-overline text-medium-emphasis">Shortcut</span>
-            <v-btn rounded="sm" @click="clearData"> Clear </v-btn>
-            <v-btn rounded="sm" @click="exampleData"> Example </v-btn>
-            <v-btn icon="mdi-cog" rounded="sm" density="comfortable" />
+            <v-btn size="small" rounded="sm" @click="clearData"> Clear </v-btn>
+            <v-btn size="small" rounded="sm" @click="exampleData"> Example </v-btn>
+            <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
           </div>
           <div style="width: 120px">
             <v-select
@@ -19,8 +19,8 @@
               hide-details
             ></v-select>
           </div>
-          <div class="mt-2">
-            <v-btn prepend-icon="mdi-content-copy" rounded="sm" @click="copyToClipboard">Copy</v-btn>
+          <div class="">
+            <v-btn size="small" prepend-icon="mdi-content-copy" rounded="sm" @click="copyToClipboard">Copy</v-btn>
           </div>
         </div>
         <div class="mt-3">
@@ -54,7 +54,8 @@
         <v-divider class="my-4"></v-divider>
         <div>
           <v-textarea label="Payload" variant="outlined" rows="8" v-model="payload" hide-details></v-textarea>
-          <div class="mt-2">Issued At: {{ issuesAt }}</div>
+          <div v-if="expirationTime" class="mt-2">Expiration Time: {{ expirationTime }}</div>
+          <div v-if="issuesAt" class="mt-2">Issued At: {{ issuesAt }}</div>
         </div>
         <v-divider class="my-4"></v-divider>
         <div>
@@ -138,6 +139,7 @@
       const payload = ref<string | null>(null)
       const algorithm = ref<string>('HS256')
       const issuesAt = ref<string | null>(null)
+      const expirationTime = ref<string | null>(null)
       const ignoreUpdate = ref<boolean>(false)
       // For HS
       const signature = ref<string | null>('your-256-bit-secret')
@@ -156,6 +158,7 @@
         algorithm,
         isSecretBase64Encoded,
         issuesAt,
+        expirationTime,
         ignoreUpdate,
         publicKey,
         privateKey,
@@ -182,6 +185,8 @@
         this.header = null
         this.payload = null
         this.isValidSignature = null
+        this.issuesAt = null;
+        this.expirationTime = null;
       },
       bindTokenData: function (decoded: any) {
         if (!decoded) {
@@ -195,14 +200,20 @@
         if (payload && payload.iat) {
           this.issuesAt = new Date(payload.iat * 1000).toJSON()
         }
+        if (payload && payload.exp) {
+          this.expirationTime = new Date(payload.exp * 1000).toJSON()
+        }
         if (header && header.alg) {
           this.algorithm = header.alg
         }
       },
       signJWT: function (signature: string | Buffer, ignoreUpdate?: boolean) {
         try {
+          if (!this.payload) {
+            return;
+          }
           const token = jwt.sign(this.payload, signature, { algorithm: this.algorithm })
-          this.ignoreUpdate = ignoreUpdate === false ? false : true
+          this.ignoreUpdate = ignoreUpdate === true ? true : false
           this.input = token
         } catch (error: any) {
           this.isValidSignature = false
@@ -210,7 +221,7 @@
         }
       },
       renderEncryptFunc: function (key: string): string {
-        return MAPPING_TYPE[key] || ''
+        return (MAPPING_TYPE as any)[key] || ''
       }
     },
     watch: {
@@ -230,10 +241,10 @@
                 return
               }
               let decoded = null
-              if (this.signature === 'your-256-bit-secret') {
+              if (!this.signature || this.signature === 'your-256-bit-secret') {
                 decoded = jwt.decode(token, { complete: true })
               } else {
-                decoded = jwt.verify(token, this.signature, { complete: true, algorithm: this.algorithm })
+                decoded = jwt.verify(token, this.signature, { complete: true })
               }
               this.bindTokenData(decoded)
               this.isValidSignature = true
@@ -278,10 +289,23 @@
             return
           }
           const secret = this.isSecretBase64Encoded ? Buffer.from(this.signature, 'base64') : this.signature
-          this.signJWT(secret, false)
+          this.signJWT(secret, true)
         },
         deep: true
-      }
+      },
+      payload: {
+        handler: function (val) {
+          this.delay(val, (payload: string) => {
+            if (!this.signature || this.signature.trim().length === 0 || !this.payload) {
+              this.isValidSignature = null
+              return
+            }
+            const secret = this.isSecretBase64Encoded ? Buffer.from(this.signature, 'base64') : this.signature
+            this.signJWT(secret)
+          })
+        },
+        deep: true
+      },
     }
   })
 </script>
@@ -294,5 +318,13 @@
   }
   .secret-checkbox {
     --v-input-control-height: 40px;
+  }
+
+  .v-text-field.v-text-field--solo .v-input__control{
+    min-height: 10px;
+  }
+
+  .v-label{
+    font-size: 10px;
   }
 </style>

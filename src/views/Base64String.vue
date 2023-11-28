@@ -5,8 +5,8 @@
                 <div class="d-flex justify-space-between">
                     <div class="d-flex flex-wrap ga-3">
                         <span>Shortcut</span>
-                        <v-btn size="x-small" rounded="sm" @click="exampleData"> Example </v-btn>
-                        <v-btn icon="mdi-cog" size="x-small" rounded="sm" density="comfortable" />
+                        <v-btn size="small" rounded="sm" @click="exampleData"> Example </v-btn>
+                        <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
                     </div>
                     <div>
                         <v-radio-group inline density="compact" :v-model="functionType">
@@ -22,7 +22,7 @@
         <v-row>
             <v-col cols="12">
                 <div class="d-flex flex-wrap ga-3 justify-end">
-                    <v-btn size="x-small" rounded="sm" @click="copyToClipboard"> Copy </v-btn>
+                    <v-btn size="small" rounded="sm" @click="copyToClipboard"> Copy </v-btn>
                 </div>
             </v-col>
             <v-col cols="12">
