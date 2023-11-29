@@ -185,8 +185,8 @@
         this.header = null
         this.payload = null
         this.isValidSignature = null
-        this.issuesAt = null;
-        this.expirationTime = null;
+        this.issuesAt = null
+        this.expirationTime = null
       },
       bindTokenData: function (decoded: any) {
         if (!decoded) {
@@ -210,7 +210,7 @@
       signJWT: function (signature: string | Buffer, ignoreUpdate?: boolean) {
         try {
           if (!this.payload) {
-            return;
+            return
           }
           const token = jwt.sign(this.payload, signature, { algorithm: this.algorithm })
           this.ignoreUpdate = ignoreUpdate === true ? true : false
@@ -305,7 +305,7 @@
           })
         },
         deep: true
-      },
+      }
     }
   })
 </script>
@@ -320,11 +320,7 @@
     --v-input-control-height: 40px;
   }
 
-  .v-text-field.v-text-field--solo .v-input__control{
+  .v-text-field.v-text-field--solo .v-input__control {
     min-height: 10px;
-  }
-
-  .v-label{
-    font-size: 10px;
   }
 </style>

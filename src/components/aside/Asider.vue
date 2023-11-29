@@ -1,14 +1,13 @@
 <template>
   <v-navigation-drawer class="aside-menu" floating>
     <v-text-field
-      density="compact"
-      variant="solo"
       label="Search..."
+      class="pa-2"
+      density="compact"
+      variant="solo-filled"
       prepend-inner-icon="mdi-magnify"
       single-line
       hide-details
-      style="padding: 8px"
-      bg-color="#3a3a3a"
       v-model="searchValue"
     ></v-text-field>
     <v-divider></v-divider>
@@ -28,7 +27,7 @@
 <style lang="scss">
   .aside-menu {
     .v-list-item__prepend > .v-icon ~ .v-list-item__spacer {
-      width: 18px;
+      width: 16px;
     }
   }
 </style>
@@ -61,7 +60,7 @@
     { text: 'Base64 String Encode/Decode', icon: 'mdi-history', link: '/base64-string' },
     { text: 'Base64 Image Encode/Decode', icon: 'mdi-upload', link: '/base64-image' },
     { text: 'JWT Debugger', icon: 'mdi-cloud-upload', link: '/jwt-debugger' },
-    { text: 'Excel To Json', icon: 'mdi-file-excel-outline', link: '/excel-to-json' },
+    { text: 'Excel To Json', icon: 'mdi-file-excel-outline', link: '/excel-to-json' }
   ]
 
   const searchValue = ref<string | null>(null)

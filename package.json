@@ -2,7 +2,7 @@
   "name": "initor-x-app",
   "version": "1.0.0",
   "main": "dist-electron/main/index.js",
-  "description": "Really simple Electron + Vue + Vite boilerplate.",
+  "description": "The Developer Toolbox",
   "author": "Huynh Le Kha <khahl@excelerum.com>",
   "license": "LGPL-3.0-or-later",
   "private": true,

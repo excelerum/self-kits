@@ -1,12 +1,19 @@
 import { read, utils } from 'xlsx'
 
-export type EHeader = {
+type EHeader = {
   rawKey: string
   fromKey: string
   toKey: string
 }
 
-export async function extractExcel(file: File, ops: any) {
+export type EOptions = {
+  extractType: 'table' | 'simple' | 'dynamic'
+  fixedRow: any
+  tables: any
+  ignoreValue: string[]
+}
+
+export async function extractExcel(file: File, ops: EOptions) {
   const excelJson = await parseExcel(file, ops)
   const rs: any[] = []
   for (const sheetName in excelJson) {
@@ -91,7 +98,7 @@ export async function extractExcel(file: File, ops: any) {
   return rs
 }
 
-export async function parseExcel(file: File, ops: any) {
+async function parseExcel(file: File, ops: EOptions) {
   const buffer = await file.arrayBuffer()
   const workbook = read(buffer, {
     type: 'binary'
