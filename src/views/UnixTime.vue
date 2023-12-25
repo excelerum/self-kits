@@ -224,7 +224,7 @@ export default {
                 const seconds = moment().diff(moment(inputDate), 'seconds')
                 this.relativeDate = this.relativeFormat(seconds)
                 // console.log(this.relativeDate)
-              }, 3000);
+              }, 500);
             }
           } else {
             this.clearOutput();

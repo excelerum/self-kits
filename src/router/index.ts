@@ -72,6 +72,12 @@ export const mainMenuItems: Array<RouteRecord> = [
     name: 'RegExp Tester',
     component: () => import('@/views/RegExpTester.vue'),
     icon: 'mdi-history'
+  },
+  {
+    path: '/html-to-json',
+    name: 'HTML to JSON',
+    component: () => import('@/views/Html2Json.vue'),
+    icon: 'mdi-history'
   }
 ]
 

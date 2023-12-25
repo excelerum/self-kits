@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- <Systembar /> -->
-    <Navbar />
+    <!-- <Navbar /> -->
     <Footer></Footer>
     <Asider />
     <v-main>

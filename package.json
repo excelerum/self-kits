@@ -23,8 +23,10 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cheerio": "^1.0.0-rc.12",
     "debounce": "^2.0.0",
     "fastify": "^4.24.3",
+    "html-to-json-parser": "^2.0.0",
     "jsonpath-plus": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
     "lokijs": "^1.5.12",
