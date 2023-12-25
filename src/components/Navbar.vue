@@ -67,7 +67,7 @@
       </v-tooltip>
       <v-tooltip bottom>
         <template v-slot:activator="{ props }">
-          <v-btn fab v-bind="props" class="teal lighten-2" size="small" icon="mdi-account-edit-outline" />
+          <v-btn fab v-bind="props" class="teal lighten-2" size="small" icon="mdi-account-edit-outline" to="/sign-up"/>
         </template>
         <span>Manage accounts</span>
       </v-tooltip>

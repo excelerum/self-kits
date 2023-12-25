@@ -14,11 +14,9 @@
 
         <!--begin::Link-->
         <div class="d-flex justify-center">
-          <router-link to="/" class="btn btn-primary">
-            <v-btn prepend-icon="mdi-home" variant="tonal">
-              Back to Home
-            </v-btn>
-          </router-link>
+          <v-btn prepend-icon="mdi-home" variant="tonal" to="/">
+            Back to Home
+          </v-btn>
         </div>
         <!--end::Link-->
       </div>

@@ -1,84 +1,60 @@
 <template>
-  <v-navigation-drawer class="aside-menu" floating>
-    <v-text-field
-      label="Search..."
-      class="pa-2"
-      density="compact"
-      variant="solo-filled"
-      prepend-inner-icon="mdi-magnify"
-      single-line
-      hide-details
-      v-model="searchValue"
-    ></v-text-field>
+  <!-- <v-navigation-drawer
+    color="grey-lighten-3"
+    rail
+  >
+  </v-navigation-drawer> -->
+  <v-navigation-drawer floating class="aside-menu">
+    <v-text-field label="Search..." class="pa-2" density="compact" variant="solo-filled" prepend-inner-icon="mdi-magnify"
+      single-line hide-details v-model="searchValue"></v-text-field>
     <v-divider></v-divider>
 
     <v-list :lines="false" density="comfortable" nav>
-      <v-list-item v-for="(item, i) in menuItems" :key="i" :value="item" color="primary" :to="item.link">
+      <v-list-item v-for="(item, i) in menuItems" :key="i" :value="item" color="primary" :to="item.path">
         <template v-slot:prepend>
           <v-icon :icon="item.icon"></v-icon>
         </template>
 
-        <v-list-item-title v-text="item.text"></v-list-item-title>
+        <v-list-item-title v-text="item.name"></v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <style lang="scss">
-  .aside-menu {
-    .v-list-item__prepend > .v-icon ~ .v-list-item__spacer {
-      width: 16px;
-    }
+.aside-menu {
+  .v-list-item__prepend>.v-icon~.v-list-item__spacer {
+    width: 16px;
   }
+}
 </style>
 
 <script setup lang="ts">
-  import debounce from 'debounce'
-  import { ref, watch } from 'vue'
+import { mainMenuItems } from '@/router';
+import debounce from 'debounce'
+import { ref, watch } from 'vue'
 
-  const items = [
-    {
-      text: 'Welcome',
-      icon: 'mdi-home',
-      link: '/home'
-    },
-    {
-      text: 'Unix Time Converter',
-      icon: 'mdi-clock-outline',
-      link: '/unix-time-converter'
-    },
-    {
-      text: 'JSON Format/Validate',
-      icon: 'mdi-code-json',
-      link: '/json-format-validate'
-    },
-    {
-      text: 'Bcrypt Generator',
-      icon: 'mdi-onepassword',
-      link: '/bcrypt-generator'
-    },
-    { text: 'Base64 String Encode/Decode', icon: 'mdi-history', link: '/base64-string' },
-    { text: 'Base64 Image Encode/Decode', icon: 'mdi-upload', link: '/base64-image' },
-    { text: 'JWT Debugger', icon: 'mdi-cloud-upload', link: '/jwt-debugger' },
-    { text: 'Excel To Json', icon: 'mdi-file-excel-outline', link: '/excel-to-json' }
-  ]
+const items = mainMenuItems.filter(x => x.name && x.hide !== false).map(x => {
+  delete x.component;
+  return x;
+})
 
-  const searchValue = ref<string | null>(null)
-  const menuItems = ref<any[]>(items)
+const searchValue = ref<string | null>(null)
+const menuItems = ref<any[]>(items)
 
-  /**
-   * Watch on search menu
-   */
-  watch(
-    searchValue,
-    debounce((newValue, oldValue) => {
-      if (newValue !== oldValue) {
-        if (newValue) {
-          menuItems.value = items.filter((x) => newValue && x.text.toLowerCase().includes(newValue.toLowerCase()))
-        } else {
-          menuItems.value = [...items]
-        }
+/**
+ * Watch on search menu
+ */
+watch(
+  searchValue,
+  debounce((newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      if (newValue) {
+        menuItems.value = items.filter((x) => newValue && String(x.name).toLowerCase().includes(newValue.toLowerCase()))
+      } else {
+        menuItems.value = [...items]
       }
-    }, 500)
-  )
+    }
+  }, 500)
+)
 </script>

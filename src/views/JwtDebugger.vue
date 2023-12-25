@@ -212,7 +212,8 @@
           if (!this.payload) {
             return
           }
-          const token = jwt.sign(this.payload, signature, { algorithm: this.algorithm })
+          const algorithm = this.algorithm;
+          const token = jwt.sign(this.payload, signature, { algorithm })
           this.ignoreUpdate = ignoreUpdate === true ? true : false
           this.input = token
         } catch (error: any) {
@@ -289,14 +290,14 @@
             return
           }
           const secret = this.isSecretBase64Encoded ? Buffer.from(this.signature, 'base64') : this.signature
-          this.signJWT(secret, true)
+          this.signJWT(secret)
         },
         deep: true
       },
       payload: {
         handler: function (val) {
           this.delay(val, (payload: string) => {
-            if (!this.signature || this.signature.trim().length === 0 || !this.payload) {
+            if (!this.signature || this.signature.trim().length === 0 || !payload) {
               this.isValidSignature = null
               return
             }

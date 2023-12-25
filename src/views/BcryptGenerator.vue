@@ -17,13 +17,14 @@
           variant="outlined"
           density="compact"
           v-model.trim="input"
-          :loading="isEncrypting"
         ></v-text-field>
       </v-col>
       <v-col :cols="4">
         <v-text-field label="Round" variant="outlined" density="compact" v-model.number="encryptRound"></v-text-field>
       </v-col>
-      <v-col :cols="2"><v-btn rounded="sm" @click="onEncrypt"> Encode </v-btn></v-col>
+      <v-col :cols="2">
+        <v-btn rounded="sm" @click="onEncrypt" :loading="isEncrypting"> Encode </v-btn>
+      </v-col>
     </v-row>
     <v-divider></v-divider>
     <v-row class="ma-2">
@@ -34,7 +35,6 @@
           density="compact"
           v-model="output"
           append-inner-icon="mdi-content-copy"
-          single-line
           hide-details
           @click:append-inner="onCopyOutput"
         ></v-text-field>

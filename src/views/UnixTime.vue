@@ -14,7 +14,7 @@
     <v-row class="ma-2">
       <v-col :cols="6">
         <v-text-field label="Input" variant="outlined" density="compact"
-          hint="Tips: Mathematical operators + - * / are supported" persistent-hint v-model.trim="input"></v-text-field>
+          hint="Tips: Mathematical operators + - * / are supported" persistent-hint v-model="input"></v-text-field>
       </v-col>
       <v-col :cols="6">
         <v-select label="Type" :model-value="inputType" :items="inputTypeOp" variant="outlined"
@@ -68,6 +68,7 @@ import debounce from 'debounce';
 import { ref } from 'vue'
 import moment from 'moment';
 import { clipboard } from 'electron';
+import { copyToClipboard } from '@/utils/command-utils';
 
 export default {
   name: 'UnixTime',
@@ -169,11 +170,17 @@ export default {
         this.dateByFormat = null;
       }
     },
-    copyToClipboard: function (value: any) {
-      if (value) {
-        clipboard.writeText(String(value));
-      }
+    copyToClipboard: copyToClipboard, // From Utils.
+    padStart: function (val: number) {
+      return String(Math.abs(val)).padStart(2, "0")
     },
+    relativeFormat: function (seconds: number) {
+      const HH = Math.floor(seconds / 3600);
+      const MM = Math.floor(seconds / 60) % 60;
+      const SS = seconds % 60;
+      const isBefore = HH < 0 || MM < 0 || SS < 0;
+      return `${this.padStart(HH)}:${this.padStart(MM)}:${this.padStart(SS)} ${isBefore ? 'before' : 'ago'}`
+    }
   },
   watch: {
     input: {
@@ -181,42 +188,43 @@ export default {
         console.log(val)
         this.delay(val, (input: number | string | null) => {
           const strVal = input ? String(input).trim() : null;
+          const regNum = /[+\-*\/]*[0-9]+/;
           if (strVal) {
-            try {
-              const rsDate = strVal.match(/[+\-*\/]+/gm) ? this.executeMath(strVal) : strVal;
-              const inputDate = new Date(+rsDate);
-              this.localDate = inputDate.toLocaleString();
-              this.utcDate = inputDate.toUTCString();
-              this.unixTime = String(inputDate.getTime());
-              this.dayOfYear = moment(inputDate).dayOfYear();
-              this.weekOfYear = moment(inputDate).weeksInYear();
-              this.isLeafYear = moment(inputDate).isLeapYear();
-              if (this.formatByCountry) {
-                this.formatDateByCountry(this.formatByCountry);
+            let rsDate = "N/A";
+            if (strVal.match(regNum)) {
+              try {
+                rsDate = strVal.match(/[+\-*\/]+/gm) ? this.executeMath(strVal) : strVal;
+              } catch (error: any) {
+                this.errorMessage = error.message;
+                console.error(error)
               }
+            }
+            const inputDate = new Date(+rsDate);
+            this.localDate = inputDate.toLocaleString();
+            this.utcDate = inputDate.toUTCString();
+            this.unixTime = String(inputDate.getTime());
+            this.dayOfYear = moment(inputDate).dayOfYear();
+            this.weekOfYear = moment(inputDate).weeksInYear();
+            this.isLeafYear = moment(inputDate).isLeapYear();
+            if (this.formatByCountry) {
+              this.formatDateByCountry(this.formatByCountry);
+            }
 
-              const isLate = moment().isAfter(inputDate);
-
-              const seconds = moment().diff(moment(inputDate), 'seconds')
-              const formatted = moment.utc(seconds * 1000).format('HH:mm:ss');
-              this.relativeDate = `${formatted} ${isLate ? 'before' : 'ago'}`;
-              // Handle for this case
-              if (this.relativeDateTimer) {
-                clearInterval(this.relativeDateTimer);
-              }
+            const seconds = moment().diff(moment(inputDate), 'seconds')
+            this.relativeDate = this.relativeFormat(seconds)
+            // Handle for this case
+            if (this.relativeDateTimer) {
+              clearInterval(this.relativeDateTimer);
+            }
+            if (isFinite(+inputDate)) { // Check date is valid.
               this.relativeDateTimer = setInterval(() => {
                 // Auto decrease every seconds.
                 // this.relativeDate = moment(inputDate).fromNow();
-                const isLate = moment().isAfter(inputDate);
 
                 const seconds = moment().diff(moment(inputDate), 'seconds')
-                const formatted = moment.utc(seconds * 1000).format('HH:mm:ss');
-                this.relativeDate = `${formatted} ${isLate ? 'before' : 'ago'}`;
-                console.log(this.relativeDate)
-              }, 500);
-            } catch (error: any) {
-              this.errorMessage = error.message;
-              console.error(error)
+                this.relativeDate = this.relativeFormat(seconds)
+                // console.log(this.relativeDate)
+              }, 3000);
             }
           } else {
             this.clearOutput();

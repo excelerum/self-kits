@@ -15,7 +15,10 @@ export class FastifyServer {
     const server = fastify()
 
     server.get('/ping', async (request, reply) => {
-      return 'pong\n'
+      reply
+        .code(200)
+        .header('Content-Type', 'application/json; charset=utf-8')
+        .send({ message: 'pong' })
     })
 
     server.listen({ port: this.port || 0 }, (err, address) => {

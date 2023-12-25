@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { clipboard } from 'electron'
-import { extractExcel } from '@/utils/excel-utils';
+import { EOptions, extractExcel } from '@/utils/excel-utils';
 import MonacoEditor from '@/components/code-editor/MonacoEditor.vue'
 
 const input = ref<File[]>([]);
@@ -47,8 +47,8 @@ const options = {
     tabSize: 2,
 }
 
-const excelConfig = {
-    extractType: '',
+const excelConfig: EOptions = {
+    extractType: 'simple',
     ignoreValue: ["-"],
     fixedRow: [{
         row: 1,
@@ -96,9 +96,11 @@ async function loadExcelData() {
     console.log(input.value);
     if (input.value.length > 0) {
         const file = input.value[0];
-        excelConfig.extractType = extractType.value;
+        excelConfig.extractType = extractType.value as any;
         const data = await extractExcel(file, excelConfig);
         output.value = JSON.stringify(data, null, 4);
+    } else {
+        output.value = "";
     }
 }
 

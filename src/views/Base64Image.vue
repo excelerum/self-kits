@@ -49,10 +49,8 @@ export default defineComponent({
     setup() {
         const input = ref<string | null>(null);
         const imageBytes = ref<string | null>(null);
-        const functionType = ref<string>('encode');
 
         return {
-            functionType,
             input,
             errorMessage: '',
             imageBytes

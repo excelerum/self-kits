@@ -24,7 +24,7 @@
 
       <v-col :cols="6">
         <div class="d-flex flex-wrap ga-3 justify-end">
-          <v-btn size="small" rounded="sm"> Copy </v-btn>
+          <v-btn size="small" rounded="sm" @click="copyToClipboard(output)"> Copy </v-btn>
           <!-- <v-select class="output-space" label="Space" :items="[1, 2, 3, 4]" variant="outlined" :model-value="space"
             density="compact" style="width: 20px"></v-select> -->
           <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
@@ -52,6 +52,7 @@
 import MonacoEditor from '@/components/code-editor/MonacoEditor.vue'
 import debounce from 'debounce'
 import { JSONPath } from 'jsonpath-plus';
+import { copyToClipboard } from '@/utils/command-utils'
 
 export default {
   name: 'JsonFormat',
@@ -131,7 +132,8 @@ export default {
           ]
         }
       }, null, 2)
-    }
+    },
+    copyToClipboard: copyToClipboard
   }
 }
 </script>

@@ -1,16 +1,19 @@
 <template>
-  <v-footer app inset border class="app-footer pa-2 text-medium-emphasis" height="24">
-    <v-btn class="footer-menu-icon" size="x-small" prepend-icon="mdi-console" variant="text" rounded="0" text="Console" />
+  <v-footer app border class="app-footer pa-2 text-medium-emphasis" height="24">
+    <v-btn class="footer-menu-icon" size="x-small" prepend-icon="mdi-console" variant="text" rounded="0" text="Console"
+      @click="openDevTools" />
 
     <v-spacer></v-spacer>
 
-    <div class="d-flex flex-wrap ga-3">
+    <div class="d-flex flex-wrap ga-2">
+      <v-btn class="footer-menu-icon" size="x-small" prepend-icon="mdi-email-fast-outline" variant="text" rounded="0"
+        text="Feedback" />
+      <v-btn class="footer-menu-icon app-version" rounded="0" density="comfortable" variant="text" size="x-small"
+        prepend-icon=" mdi-tag-outline" :text="version">
+      </v-btn>
       <v-btn class="footer-menu-icon" rounded="0" density="comfortable" variant="text" size="x-small" icon="mdi-keyboard">
       </v-btn>
       <v-btn class="footer-menu-icon" rounded="0" density="comfortable" variant="text" size="x-small" icon="mdi-help">
-      </v-btn>
-      <v-btn class="footer-menu-icon app-version" rounded="0" density="comfortable" variant="text" size="x-small"
-        prepend-icon=" mdi-tag-outline" text="1.0.0">
       </v-btn>
     </div>
   </v-footer>
@@ -26,13 +29,26 @@
     // Fix heigh issues
     height: calc(var(--v-btn-height) + 0px);
   }
+
+  .v-btn .v-btn__prepend+.v-btn__content {
+    margin-bottom: 2px;
+  }
 }
 </style>
 
 <script lang="ts">
+import { ipcRenderer } from 'electron'
+import pkg from "../../package.json";
+
 export default {
   data: () => ({
     toggle_exclusive: undefined,
+    version: pkg.version
   }),
+  methods: {
+    openDevTools: function () {
+      ipcRenderer.send('COMMANDS', "OPEN_DEVTOOLS");
+    }
+  }
 };
 </script>

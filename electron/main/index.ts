@@ -1,7 +1,6 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
-import { FastifyServer } from './server'
 
 // The built directory structure
 //
@@ -53,6 +52,7 @@ async function createWindow() {
       nodeIntegration: true,
       contextIsolation: false
     }
+    // titleBarStyle: 'hidden'
   })
 
   if (process.env.VITE_DEV_SERVER_URL) {
@@ -115,6 +115,18 @@ ipcMain.handle('open-win', (_, arg) => {
     childWindow.loadURL(`${url}#${arg}`)
   } else {
     childWindow.loadFile(indexHtml, { hash: arg })
+  }
+})
+
+ipcMain.on('COMMANDS', (_event, data) => {
+  console.log('COMMANDS: ', data)
+  switch (data) {
+    case "OPEN_DEVTOOLS":
+      win?.webContents.openDevTools()
+      break;
+  
+    default:
+      break;
   }
 })
 
