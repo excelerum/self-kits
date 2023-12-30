@@ -78,7 +78,7 @@
 <script lang="ts">
 export default {
   data: () => ({
-    items: [{ title: 'Tab' }, { title: 'Initor-X Window' }, { title: 'Runner Window' }],
+    items: [{ title: 'Tab' }, { title: 'Window' }, { title: 'Runner Window' }],
     links: [{ title: 'Ctrl+T' }, { title: 'Ctrl+Shift+N' }, { title: 'Ctrl+Shift+R' }]
   })
 }

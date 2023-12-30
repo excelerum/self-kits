@@ -1,3 +1,3 @@
-# Initor-X
+# Self-Kits
 
 Free & Open source Development Toolkit for Software Engineer

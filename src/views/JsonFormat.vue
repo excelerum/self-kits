@@ -8,26 +8,36 @@
           </div>
           <div class="d-flex flex-wrap ga-3">
             <v-btn size="small" rounded="sm" @click="generateExample"> Example </v-btn>
-            <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
           </div>
         </div>
         <div class="my-3">
           <MonacoEditor id="input" theme="vs-dark" :options="options" language="json" width="100%" :height="600"
             v-model:value="input">
           </MonacoEditor>
-          <div class="mt-2">
-            <v-sheet class="pa-2" v-if="errorMessage" :height="80" color="error">{{ errorMessage
-            }}</v-sheet>
-          </div>
+        </div>
+        <div class="">
+          <v-sheet class="pa-2" v-if="errorMessage" :height="60" color="error">{{ errorMessage }}</v-sheet>
         </div>
       </v-col>
 
       <v-col :cols="6">
         <div class="d-flex flex-wrap ga-3 justify-end">
           <v-btn size="small" rounded="sm" @click="copyToClipboard(output)"> Copy </v-btn>
-          <!-- <v-select class="output-space" label="Space" :items="[1, 2, 3, 4]" variant="outlined" :model-value="space"
-            density="compact" style="width: 20px"></v-select> -->
-          <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
+          <v-menu v-model="menu" :close-on-content-click="false" location="bottom">
+            <template v-slot:activator="{ props }">
+              <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" v-bind="props" />
+            </template>
+
+            <v-card min-width="120">
+              <v-list>
+                <v-list-item width="160">
+                  <div class="text-subtitle-1 text-medium-emphasis">Space</div>
+                  <v-select wid class="output-space" :items="[1, 2, 3, 4]" variant="outlined" v-model:model-value="space"
+                    density="compact" hide-details></v-select>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-menu>
         </div>
         <div class="my-3">
           <MonacoEditor id="output" theme="vs-dark" :options="options" language="json" width="100%" :height="600"
@@ -73,29 +83,39 @@ export default {
       isValidInput: false,
       errorMessage: '',
       query: '',
-      tempOutput: ''
+      tempOutput: '',
+      menu: false,
+      message: false
     }
   },
   watch: {
     input: {
-      handler: function (val) {
-        this.formatJSON(val, (value: string) => {
-          try {
-            this.output = val ? JSON.stringify(JSON.parse(value), null, this.space) : "";
-            this.tempOutput = this.output;
-            this.isValidInput = true;
-            this.errorMessage = '';
-          } catch (error: any) {
-            this.isValidInput = false;
-            this.errorMessage = error.message;
-          }
+      handler: function (value) {
+        this.delay(value, (cbValue: string) => {
+          this.formatJSON(cbValue);
         })
       },
       deep: true
+    },
+    space: {
+      handler: function (_value) {
+        this.formatJSON(this.input);
+      }
     }
   },
   methods: {
-    formatJSON: debounce(function (value: string, callback: Function) {
+    formatJSON: function (value: string) {
+      try {
+        this.output = value ? JSON.stringify(JSON.parse(value), null, this.space) : "";
+        this.tempOutput = this.output;
+        this.isValidInput = true;
+        this.errorMessage = '';
+      } catch (error: any) {
+        this.isValidInput = false;
+        this.errorMessage = error.message;
+      }
+    },
+    delay: debounce(function (value: string, callback: Function) {
       callback(value)
     }, 500),
     queryJSON: function () {
@@ -131,7 +151,7 @@ export default {
             }
           ]
         }
-      }, null, 2)
+      })
     },
     copyToClipboard: copyToClipboard
   }

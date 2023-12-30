@@ -28,8 +28,8 @@
           <v-text-field label="Local" variant="outlined" density="compact" v-model.lazy="localDate"
             append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(localDate)">
           </v-text-field>
-          <v-text-field label="UTC (ISO 8601)" variant="outlined" density="compact" v-model.lazy="utcDate"
-            append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(utcDate)">
+          <v-text-field label="UTC (ISO 8601)" variant="outlined" density="compact" v-model.lazy="isoDate"
+            append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(isoDate)">
           </v-text-field>
           <v-text-field label="Relative" variant="outlined" density="compact" v-model.lazy="relativeDate"
             append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(relativeDate)">
@@ -53,8 +53,9 @@
         </div>
       </v-col>
       <v-col :cols="5">
-        <v-select label="Format by Country" :items="formatByCountryOp" variant="outlined" density="compact"
-          v-model="formatByCountry" clearable></v-select>
+        <v-autocomplete label="Format by Country" :items="formatByCountryOp" variant="outlined" density="compact"
+          v-model="formatByCountry" clearable>
+        </v-autocomplete>
         <v-text-field variant="outlined" density="compact" v-model.lazy="dateByFormat"
           append-inner-icon="mdi-content-copy" @click:append-inner="(_$event: any) => copyToClipboard(dateByFormat)">
         </v-text-field>
@@ -69,6 +70,7 @@ import { ref } from 'vue'
 import moment from 'moment';
 import { clipboard } from 'electron';
 import { copyToClipboard } from '@/utils/command-utils';
+import { LOCALES } from '@/utils/constants';
 
 export default {
   name: 'UnixTime',
@@ -76,7 +78,7 @@ export default {
     const input = ref<string | number | null>(null);
     const inputType = ref<string>("unix");
     const localDate = ref<string | null>(null);
-    const utcDate = ref<string | null>(null);
+    const isoDate = ref<string | null>(null);
     const relativeDate = ref<string | null>(null);
     const unixTime = ref<string | null>(null);
     const dayOfYear = ref<number | null>(null);
@@ -91,24 +93,13 @@ export default {
       title: 'Unix time (seconds since epoch)'
     }]
 
-    const formatByCountryOp = [{
-      value: 'en-GB',
-      title: 'en-GB'
-    },
-    {
-      value: 'en-US',
-      title: 'en-US'
-    },
-    {
-      value: 'ko-KR',
-      title: 'ko-KR'
-    }]
+    const formatByCountryOp = [...LOCALES]
 
     return {
       input,
       inputType,
       localDate,
-      utcDate,
+      isoDate,
       relativeDate,
       relativeDateTimer,
       unixTime,
@@ -150,7 +141,7 @@ export default {
     },
     clearOutput: function () {
       this.localDate = null;
-      this.utcDate = null;
+      this.isoDate = null;
       this.unixTime = null;
       this.dayOfYear = null;
       this.weekOfYear = null;
@@ -165,7 +156,7 @@ export default {
     },
     formatDateByCountry: function (format: string) {
       if (format && this.input) {
-        this.dateByFormat = new Date(this.input).toLocaleString(format);
+        this.dateByFormat = new Date(this.input).toLocaleString(format) || "";
       } else {
         this.dateByFormat = null;
       }
@@ -201,7 +192,7 @@ export default {
             }
             const inputDate = new Date(+rsDate);
             this.localDate = inputDate.toLocaleString();
-            this.utcDate = inputDate.toUTCString();
+            this.isoDate = inputDate.toISOString();
             this.unixTime = String(inputDate.getTime());
             this.dayOfYear = moment(inputDate).dayOfYear();
             this.weekOfYear = moment(inputDate).weeksInYear();
@@ -235,9 +226,7 @@ export default {
     },
     formatByCountry: {
       handler: function (val) {
-        if (val) {
-          this.formatDateByCountry(val);
-        }
+        this.formatDateByCountry(val);
       },
       deep: true
     }

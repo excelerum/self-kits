@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card outlined class="mt-5 mr-10 pa-3">
-      <h3 class="ml-5 mt-5">What's new with Initor-X</h3>
+      <h3 class="ml-5 mt-5">What's new with Self-Kits</h3>
       <h4 class="mt-5 ml-7">
         It's Rocket Fuel for Your API Skills<span class="ml-3 text--darken-3 px-1"
           style="border: 1px solid #ef6c00">New</span>

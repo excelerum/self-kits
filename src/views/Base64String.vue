@@ -6,10 +6,10 @@
                     <div class="d-flex flex-wrap ga-3">
                         <span>Shortcut</span>
                         <v-btn size="small" rounded="sm" @click="exampleData"> Example </v-btn>
-                        <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
+                        <v-btn size="small" rounded="sm" @click="clearData"> Clear </v-btn>
                     </div>
                     <div>
-                        <v-radio-group inline density="compact" :v-model="functionType">
+                        <v-radio-group inline density="compact" v-model="functionType">
                             <v-radio label="Encode" value="encode"></v-radio>
                             <v-radio label="Decode" value="decode"></v-radio>
                         </v-radio-group>
@@ -22,7 +22,7 @@
         <v-row>
             <v-col cols="12">
                 <div class="d-flex flex-wrap ga-3 justify-end">
-                    <v-btn size="small" rounded="sm" @click="copyToClipboard"> Copy </v-btn>
+                    <v-btn size="small" rounded="sm" @click="copyToClipboard(output)"> Copy </v-btn>
                 </div>
             </v-col>
             <v-col cols="12">
@@ -36,7 +36,7 @@
 <script lang="ts">
 import debounce from 'debounce';
 import { defineComponent, ref } from 'vue'
-import { clipboard } from 'electron';
+import { copyToClipboard } from '@/utils/command-utils';
 
 export default defineComponent({
     name: 'Base64String',
@@ -49,7 +49,7 @@ export default defineComponent({
             functionType,
             input,
             output,
-            errorMessage: ''
+            errorMessage: '',
         }
     },
     methods: {
@@ -59,30 +59,41 @@ export default defineComponent({
         exampleData: function () {
             this.input = "This is example"
         },
-        copyToClipboard: function () {
-            const tmp = this.output || "";
-            clipboard.writeText(tmp);
+        clearData: function () {
+            this.input = null;
+            this.output = null;
+        },
+        copyToClipboard: copyToClipboard,
+        execute: function () {
+            try {
+                const data = this.input || "";
+                if (this.functionType === "encode") {
+                    this.output = btoa(data);
+                } else {
+                    this.output = atob(data);
+                }
+                this.errorMessage = '';
+            } catch (error: any) {
+                this.errorMessage = error.message;
+                console.error(error)
+            }
         }
     },
     watch: {
         input: {
             handler: function (val) {
                 this.delay(val, (value: string) => {
-                    try {
-                        if (this.functionType === "encode") {
-                            this.output = btoa(value);
-                        } else {
-                            this.output = atob(value);
-                        }
-                        this.errorMessage = '';
-                    } catch (error: any) {
-                        this.errorMessage = error.message;
-                        console.error(error)
-                    }
+                    this.execute();
                 })
             },
             deep: true
-        }
+        },
+        functionType: {
+            handler: function (val) {
+                this.execute();
+            },
+            deep: true
+        },
     },
 })
 

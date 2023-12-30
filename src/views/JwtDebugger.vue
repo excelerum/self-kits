@@ -212,7 +212,7 @@
           if (!this.payload) {
             return
           }
-          const algorithm = this.algorithm;
+          const algorithm = this.algorithm as any;
           const token = jwt.sign(this.payload, signature, { algorithm })
           this.ignoreUpdate = ignoreUpdate === true ? true : false
           this.input = token

@@ -1,9 +1,9 @@
 export type ReferenceItem = {
-    key: string;
-    text: string;
-    icon?: string;
-    shortcut?: string;
-    items?: ReferenceItem[]
+  key: string
+  text: string
+  icon?: string
+  shortcut?: string
+  items?: ReferenceItem[]
 }
 
 export const REFERENCE_ITEMS: ReferenceItem[] = [
@@ -1025,5 +1025,224 @@ export const REFERENCE_ITEMS: ReferenceItem[] = [
         key: 'insertTheEscapedLiteral'
       }
     ]
+  }
+]
+
+export const LOCALES = [
+  {
+    value: 'ar-SA',
+    title: 'Arabic (Saudi Arabia)'
+  },
+  {
+    value: 'bn-BD',
+    title: 'Bangla (Bangladesh)'
+  },
+  {
+    value: 'bn-IN',
+    title: 'Bangla (India)'
+  },
+  {
+    value: 'cs-CZ',
+    title: 'Czech (Czech Republic)'
+  },
+  {
+    value: 'da-DK',
+    title: 'Danish (Denmark)'
+  },
+  {
+    value: 'de-AT',
+    title: 'Austrian German'
+  },
+  {
+    value: 'de-CH',
+    title: '"Swiss" German'
+  },
+  {
+    value: 'de-DE',
+    title: 'Standard German (as spoken in Germany)'
+  },
+  {
+    value: 'el-GR',
+    title: 'Modern Greek'
+  },
+  {
+    value: 'en-AU',
+    title: 'Australian English'
+  },
+  {
+    value: 'en-CA',
+    title: 'Canadian English'
+  },
+  {
+    value: 'en-GB',
+    title: 'British English'
+  },
+  {
+    value: 'en-IE',
+    title: 'Irish English'
+  },
+  {
+    value: 'en-IN',
+    title: 'Indian English'
+  },
+  {
+    value: 'en-NZ',
+    title: 'New Zealand English'
+  },
+  {
+    value: 'en-US',
+    title: 'US English'
+  },
+  {
+    value: 'en-ZA',
+    title: 'English (South Africa)'
+  },
+  {
+    value: 'es-AR',
+    title: 'Argentine Spanish'
+  },
+  {
+    value: 'es-CL',
+    title: 'Chilean Spanish'
+  },
+  {
+    value: 'es-CO',
+    title: 'Colombian Spanish'
+  },
+  {
+    value: 'es-ES',
+    title: 'Castilian Spanish (as spoken in Central-Northern Spain)'
+  },
+  {
+    value: 'es-MX',
+    title: 'Mexican Spanish'
+  },
+  {
+    value: 'es-US',
+    title: 'American Spanish'
+  },
+  {
+    value: 'fa-IR',
+    title: 'Iranian (Iran)'
+  },
+  {
+    value: 'fi-FI',
+    title: 'Finnish (Finland)'
+  },
+  {
+    value: 'fr-BE',
+    title: 'Belgian French'
+  },
+  {
+    value: 'fr-CA',
+    title: 'Canadian French'
+  },
+  {
+    value: 'fr-CH',
+    title: '"Swiss" French'
+  },
+  {
+    value: 'fr-FR',
+    title: 'Standard French (especially in France)'
+  },
+  {
+    value: 'he-IL',
+    title: 'Hebrew (Israel)'
+  },
+  {
+    value: 'hi-IN',
+    title: 'Hindi (India)'
+  },
+  {
+    value: 'hu-HU',
+    title: 'Hungarian (Hungary)'
+  },
+  {
+    value: 'id-ID',
+    title: 'Indonesian (Indonesia)'
+  },
+  {
+    value: 'it-CH',
+    title: '"Swiss" Italian'
+  },
+  {
+    value: 'it-IT',
+    title: 'Standard Italian (as spoken in Italy)'
+  },
+  {
+    value: 'ja-JP',
+    title: 'Japanese (Japan)'
+  },
+  {
+    value: 'ko-KR',
+    title: 'Korean (Republic of Korea)'
+  },
+  {
+    value: 'nl-BE',
+    title: 'Belgian Dutch'
+  },
+  {
+    value: 'nl-NL',
+    title: 'Standard Dutch (as spoken in The Netherlands)'
+  },
+  {
+    value: 'no-NO',
+    title: 'Norwegian (Norway)'
+  },
+  {
+    value: 'pl-PL',
+    title: 'Polish (Poland)'
+  },
+  {
+    value: 'pt-BR',
+    title: 'Brazilian Portuguese'
+  },
+  {
+    value: 'pt-PT',
+    title: 'European Portuguese (as written and spoken in Portugal)'
+  },
+  {
+    value: 'ro-RO',
+    title: 'Romanian (Romania)'
+  },
+  {
+    value: 'ru-RU',
+    title: 'Russian (Russian Federation)'
+  },
+  {
+    value: 'sk-SK',
+    title: 'Slovak (Slovakia)'
+  },
+  {
+    value: 'sv-SE',
+    title: 'Swedish (Sweden)'
+  },
+  {
+    value: 'ta-IN',
+    title: 'Indian Tamil'
+  },
+  {
+    value: 'ta-LK',
+    title: 'Sri Lankan Tamil'
+  },
+  {
+    value: 'th-TH',
+    title: 'Thai (Thailand)'
+  },
+  {
+    value: 'tr-TR',
+    title: 'Turkish (Turkey)'
+  },
+  {
+    value: 'zh-CN',
+    title: 'Mainland China, simplified characters'
+  },
+  {
+    value: 'zh-HK',
+    title: 'Hong Kong, traditional characters'
+  },
+  {
+    value: 'zh-TW',
+    title: 'Taiwan, traditional characters'
   }
 ]

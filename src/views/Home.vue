@@ -9,7 +9,7 @@
             <h1 class="mb-4">Good evening!</h1>
             <p class="font-weight-light">
               Use Launchpad to start something new, pick up where you left off, or explore some resources to help
-              you master Initor-X.
+              you master Self-Kits.
             </p>
           </div>
 
@@ -19,7 +19,7 @@
             </v-col>
 
             <v-col cols="12" lg="6">
-              <Postman />
+              <NewsCard />
             </v-col>
           </v-row>
         </v-col>
@@ -35,7 +35,7 @@
   import Requests from '@/components/Requests.vue'
   import Launchpad from '@/components/Launchpad.vue'
   import Creation from '@/components/Creation.vue'
-  import Postman from '@/components/Postman.vue'
+  import NewsCard from '@/components/NewsCard.vue'
 
   export default {
     name: 'home',
@@ -43,7 +43,7 @@
       Requests,
       Launchpad,
       Creation,
-      Postman
+      NewsCard
     }
   }
 </script>
