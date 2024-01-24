@@ -2,7 +2,6 @@
 
 #### Features
 
-- Initial Project
 - Unix Time Converter
 - JSON Format/Validate
 - Bcrypt Generator

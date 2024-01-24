@@ -176,7 +176,6 @@ export default {
   watch: {
     input: {
       handler: function (val) {
-        console.log(val)
         this.delay(val, (input: number | string | null) => {
           const strVal = input ? String(input).trim() : null;
           const regNum = /[+\-*\/]*[0-9]+/;
@@ -195,7 +194,7 @@ export default {
             this.isoDate = inputDate.toISOString();
             this.unixTime = String(inputDate.getTime());
             this.dayOfYear = moment(inputDate).dayOfYear();
-            this.weekOfYear = moment(inputDate).weeksInYear();
+            this.weekOfYear = moment(inputDate).isoWeek();
             this.isLeafYear = moment(inputDate).isLeapYear();
             if (this.formatByCountry) {
               this.formatDateByCountry(this.formatByCountry);

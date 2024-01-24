@@ -9,7 +9,7 @@
       <v-btn class="footer-menu-icon" size="x-small" prepend-icon="mdi-email-fast-outline" variant="text" rounded="0"
         text="Feedback" />
       <v-btn class="footer-menu-icon app-version" rounded="0" density="comfortable" variant="text" size="x-small"
-        prepend-icon=" mdi-tag-outline" :text="version">
+        prepend-icon=" mdi-tag-outline" :text="version" @click="openReleaseNotes">
       </v-btn>
       <v-btn class="footer-menu-icon" rounded="0" density="comfortable" variant="text" size="x-small" icon="mdi-keyboard">
       </v-btn>
@@ -43,11 +43,17 @@ import pkg from "../../package.json";
 export default {
   data: () => ({
     toggle_exclusive: undefined,
-    version: pkg.version
+    version: pkg.version,
+    packageName: pkg.name
   }),
   methods: {
     openDevTools: function () {
       ipcRenderer.send('COMMANDS', "OPEN_DEVTOOLS");
+    },
+    openReleaseNotes: function () {
+      const repo = this.packageName.replace("@", "")
+      const baseUrl = `https://github.com/${repo}/releases/tag/${this.version}`;
+      window.open(baseUrl)
     }
   }
 };

@@ -35,19 +35,19 @@ export const mainMenuItems: Array<RouteRecord> = [
     path: '/base64-string',
     name: 'Base64 String Encode/Decode',
     component: () => import('@/views/Base64String.vue'),
-    icon: 'mdi-history'
+    icon: 'mdi-code-string'
   },
   {
     path: '/base64-image',
     name: 'Base64 Image Encode/Decode',
     component: () => import('@/views/Base64Image.vue'),
-    icon: 'mdi-upload'
+    icon: 'mdi-file-image'
   },
   {
     path: '/jwt-debugger',
     name: 'JWT Debugger',
     component: () => import('@/views/JwtDebugger.vue'),
-    icon: 'mdi-cloud-upload'
+    icon: 'mdi-bug-play'
   },
   {
     path: '/excel-to-json',
@@ -65,19 +65,19 @@ export const mainMenuItems: Array<RouteRecord> = [
     path: '/backslash-escape-unescape',
     name: 'Backslash Escape/Unescape',
     component: () => import('@/views/BackslashEscapeUnescape.vue'),
-    icon: 'mdi-file-excel-outline'
+    icon: 'mdi-slash-forward'
   },
   {
     path: '/regexp-tester',
     name: 'RegExp Tester',
     component: () => import('@/views/RegExpTester.vue'),
-    icon: 'mdi-history'
+    icon: 'mdi-regex'
   },
   {
     path: '/html-to-json',
     name: 'HTML to JSON',
     component: () => import('@/views/Html2Json.vue'),
-    icon: 'mdi-history'
+    icon: 'mdi-language-html5'
   }
 ]
 

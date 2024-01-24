@@ -1,13 +1,14 @@
 {
-  "name": "self-kits",
+  "name": "@excelerum/self-kits",
   "version": "0.0.1",
   "main": "dist-electron/main/index.js",
-  "description": "The Developer Toolbox",
+  "description": "Developer toolkit for yourself",
   "author": "Huynh Le Kha <khahl@excelerum.com>",
   "license": "LGPL-3.0-or-later",
   "private": true,
   "keywords": [
     "self-kits",
+    "selfkits",
     "excelerum",
     "developer-tool"
   ],
@@ -24,6 +25,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cheerio": "^1.0.0-rc.12",
+    "date-fns": "^3.1.0",
     "debounce": "^2.0.0",
     "fastify": "^4.24.3",
     "html-to-json-parser": "^2.0.0",
@@ -44,8 +46,8 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/lokijs": "^1.5.14",
     "@vitejs/plugin-vue": "^4.3.3",
-    "electron": "^26.0.0",
-    "electron-builder": "^24.6.3",
+    "electron": "^28.1.1",
+    "electron-builder": "^24.9.1",
     "eslint": "^8.54.0",
     "eslint-plugin-vue": "^9.18.1",
     "prettier": "^3.1.0",
@@ -56,7 +58,7 @@
     "vite-plugin-electron": "^0.15.3",
     "vite-plugin-electron-renderer": "^0.14.5",
     "vite-plugin-monaco-editor": "^1.1.0",
-    "vue": "^3.3.13",
+    "vue": "^3.4.5",
     "vue-router": "^4.2.5",
     "vue-tsc": "^1.8.25"
   }

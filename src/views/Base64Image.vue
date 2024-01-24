@@ -7,7 +7,6 @@
                         <span class="text-medium-emphasis">Shortcut</span>
                         <v-btn size="small" rounded="sm" @click="clearData"> Clear </v-btn>
                         <v-btn size="small" rounded="sm" @click="exampleData"> Example </v-btn>
-                        <v-btn icon="mdi-cog" size="small" rounded="sm" density="comfortable" />
                     </div>
                     <div>
                         <v-btn prepend-icon="mdi-content-copy" size="small" rounded="sm">Copy</v-btn>
@@ -21,9 +20,8 @@
             <v-col cols="6">
                 <div class="d-flex justify-space-between">
                     <span class="text-medium-emphasis">Image</span>
-                    <div class="d-flex flex-wrap ga-3 ">
-                        <v-btn size="small" rounded="sm"> Clear </v-btn>
-                        <v-btn size="small" rounded="sm" @click="downloadImage"> Dowwnload </v-btn>
+                    <div class="d-flex flex-wrap ga-3">
+                        <v-btn size="small" rounded="sm" @click="downloadImage"> Download </v-btn>
                         <v-btn size="small" rounded="sm" @click="copyToClipboard"> Copy </v-btn>
                     </div>
                 </div>

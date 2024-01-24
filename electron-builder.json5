@@ -5,7 +5,7 @@
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "com.excelerum.selfkits",
   "asar": true,
-  "productName": "Self-Kits",
+  "productName": "Selfkits",
   "directories": {
     "output": "release/${version}"
   },

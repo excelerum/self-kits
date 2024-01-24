@@ -15,5 +15,8 @@ app.use(vuetify)
 app.use(router)
 
 app.mount('#app').$nextTick(() => {
-  postMessage({ payload: 'removeLoading' }, '*')
+  setTimeout(() => {
+    // Wait 500ms after DOM ok.
+    postMessage({ payload: 'removeLoading' }, '*')
+  }, 500);
 })

@@ -48,7 +48,7 @@
             <span class="text-overline text-medium-emphasis">Decoded</span>
           </div>
           <div class="mt-3">
-            <v-textarea label="Header" variant="outlined" rows="8" v-model="header" hide-details></v-textarea>
+            <v-textarea label="Header" variant="outlined" rows="6" v-model="header" hide-details></v-textarea>
           </div>
         </div>
         <v-divider class="my-4"></v-divider>
@@ -113,7 +113,7 @@
   import debounce from 'debounce'
   import { defineComponent, ref } from 'vue'
   import { clipboard } from 'electron'
-  import jwt from 'jsonwebtoken'
+  import jwt, { SignOptions } from 'jsonwebtoken'
 
   const MAPPING_TYPE = Object.freeze({
     HS256: 'HMACSHA256',
@@ -132,6 +132,8 @@
 
   export default defineComponent({
     name: 'JWTDebugger',
+    components: {
+    },
     setup() {
       const input = ref<string | null>(null)
       const isValidSignature = ref<boolean | null>(null)
@@ -141,6 +143,7 @@
       const issuesAt = ref<string | null>(null)
       const expirationTime = ref<string | null>(null)
       const ignoreUpdate = ref<boolean>(false)
+      const ignoreSign = ref<boolean>(false)
       // For HS
       const signature = ref<string | null>('your-256-bit-secret')
       const isSecretBase64Encoded = ref<boolean>(false)
@@ -160,10 +163,12 @@
         issuesAt,
         expirationTime,
         ignoreUpdate,
+        ignoreSign,
         publicKey,
         privateKey,
         isHSAlgorithm,
-        algorithmType: Object.keys(MAPPING_TYPE)
+        algorithmType: Object.keys(MAPPING_TYPE),
+        nullDatetime: null
       }
     },
     methods: {
@@ -172,7 +177,7 @@
       }, 500),
       exampleData: function () {
         this.input =
-          'eyJhbDFnIjoiSFMyNTYiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.DKTodl52ESV_0fr7MMGga7d6hr8mf14HCtLkQ5HONHE'
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJzdWIiOiAiMTIzNDU2Nzg5MCIsCiAgIm5hbWUiOiAiU2VsZmtpdHMiLAogICJpYXQiOiAxNTE2MjM5MDIyCn0.HcU_XBwLBhnMmxKN-oUxULvmxjR9weads2bfGViN8FE'
       },
       copyToClipboard: function () {
         const token = this.input
@@ -207,14 +212,24 @@
           this.algorithm = header.alg
         }
       },
-      signJWT: function (signature: string | Buffer, ignoreUpdate?: boolean) {
+      signJWT: function (signature: string | Buffer) {
         try {
+          if (this.ignoreSign) {
+            this.ignoreSign = false
+            return
+          }
           if (!this.payload) {
             return
           }
           const algorithm = this.algorithm as any;
-          const token = jwt.sign(this.payload, signature, { algorithm })
-          this.ignoreUpdate = ignoreUpdate === true ? true : false
+          const options: SignOptions = {
+            algorithm
+          }
+          if (this.header) {
+            options.header = JSON.parse(this.header)
+          }
+          const token = jwt.sign(this.payload, signature, options)
+          this.ignoreUpdate = true
           this.input = token
         } catch (error: any) {
           this.isValidSignature = false
@@ -247,6 +262,7 @@
               } else {
                 decoded = jwt.verify(token, this.signature, { complete: true })
               }
+              this.ignoreSign = true;
               this.bindTokenData(decoded)
               this.isValidSignature = true
             } catch (error: any) {
