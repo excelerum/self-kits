@@ -52,15 +52,14 @@ async function createWindow() {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
       // nodeIntegration: true,
+
       // Consider using contextBridge.exposeInMainWorld
       // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
-      // contextIsolation: false
-    }
-    // titleBarStyle: 'hidden'
+      // contextIsolation: false,
+    },
   })
 
-  if (process.env.VITE_DEV_SERVER_URL) {
-    // electron-vite-vue#298
+  if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
     win.loadURL(url)
     // Open devTool if the app is not packaged
     win.webContents.openDevTools()
@@ -111,8 +110,8 @@ ipcMain.handle('open-win', (_, arg) => {
     webPreferences: {
       preload,
       nodeIntegration: true,
-      contextIsolation: false
-    }
+      contextIsolation: false,
+    },
   })
 
   if (process.env.VITE_DEV_SERVER_URL) {
@@ -133,6 +132,3 @@ ipcMain.on('COMMANDS', (_event, data) => {
       break;
   }
 })
-
-// const server = new FastifyServer(6969)
-// server.init()
