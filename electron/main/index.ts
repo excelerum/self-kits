@@ -1,6 +1,7 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
+import { update } from './update'
 
 // The built directory structure
 //
@@ -75,6 +76,10 @@ async function createWindow() {
     return { action: 'deny' }
   })
   // win.webContents.on('will-navigate', (event, url) => { }) #344
+
+  // Apply electron-updater
+  update(win)
+  // Custom processing
 }
 
 app.whenReady().then(createWindow)
@@ -121,12 +126,12 @@ ipcMain.handle('open-win', (_, arg) => {
 ipcMain.on('COMMANDS', (_event, data) => {
   console.log('COMMANDS: ', data)
   switch (data) {
-    case "OPEN_DEVTOOLS":
+    case 'OPEN_DEVTOOLS':
       win?.webContents.openDevTools()
-      break;
-  
+      break
+
     default:
-      break;
+      break
   }
 })
 
